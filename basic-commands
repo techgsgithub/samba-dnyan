@@ -15,8 +15,9 @@ IMPORTANT :  All these commands are to be executed  from terminal windows  while
 [13]        Remove user from group                : gpasswd -d user_name group_name 
 
 
+To test samba file :  testparm /etc/samba/smb.conf
 
 
 
-
-            sudo service smbd force-reload
+Restart Samba configuration : sudo service smbd force-reload
+                 
