@@ -20,4 +20,22 @@ To test samba file :  testparm /etc/samba/smb.conf
 
 
 Restart Samba configuration : sudo service smbd force-reload
-                 
+
+
+smb.conf for Anonymous Printing
+# Global parameters
+[global]
+workgroup = MIDEARTH
+netbios name = GANDALF
+security = SHARE
+passdb backend = guest
+printing = cups
+printcap name = cups
+[printers]
+comment = All Printers
+path = /var/spool/samba
+printer admin = root
+guest ok = Yes
+printable = Yes
+use client driver = Yes
+browseable = No
