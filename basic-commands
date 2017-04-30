@@ -1,0 +1,15 @@
+IMPORTANT :  All these commands are to be executed  from terminal windows  while you are root.
+
+[1]  List out all EXISTING USERS of samba server : pdbedit -L -v
+[2]  Add new user to samba   :  adduser -M user_name   // user_name = actual user // This will add user 
+[3]  Give Password to user   :  smbpasswd -a  user_name //
+[4]  Enable user for Samba   :  smbpasswd -e  user_name //
+[5]  Disable user for Samba  :  smbpasswd -d  user_name //
+[6]  Delete user from Samba  :  smbpasswd -x  user_name //
+[7]  Delete user from system :  userdel -r user_name //
+[8]  Create group for samba users :  groupadd sambausers //  groupadd accountdept  groupadd mktg  etc
+[9]  Add users to group           :  usemod -a -G gropu_name  user_name 
+[10] check the user belongs to which group : groups user_name 
+[11] Add users to multiple group : usermod -a -G group_1,group_2,group_3 user_name
+[12] Find the members of the group : lid -g  group_name
+            
