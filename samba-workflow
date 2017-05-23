@@ -1,0 +1,62 @@
+1. Install Samba
+
+sudo apt install samba
+
+2. Create Sambauser Group  
+
+sudo addgroup smbusers
+
+
+3. [ Everyone will have read and write access ]  
+
+sudo mkdir -p /shares/common
+
+sudo chown nobody:nogroup  /shares/common 
+sudo chmod -R 777 /shares/common
+
+ [ Add this block to smb.conf  at end ]
+# * * * * * * Block Start * * * * * * *
+  
+  [Common]
+	comment = Common Share for EveryOne.
+	path = /shares/common
+	browsable = yes
+	writable = yes
+	guest ok = yes
+	read only = no
+	# force user = nobody
+	# force group = nobody
+	create mask = 777   
+# * * * * * * Block End * * * * * * * * 
+4. Create group for all-smb-users
+  
+ addgroup smbusers
+
+5. Create directory for All-Samba-Users for Secured Access.
+ 
+  mkdir /shares/secured
+
+  sudo chown root:smbusers /shares/secured/
+  
+4.  User Management
+==============================
+
+[ A ]  Groups  
+=================
+       1.  Create Group      -->  addgroup Group_Name
+       2.  Delete Group      -->  groupdel Group_Name	
+       3.  Add user to Group -->  usermod User_Name -G Group_Name	
+       4.  Remove user fm Group -> gpasswd -d User_Name Group_Name	
+       5.  Add user to Multiple Group --> usermod User_Name -a -G Group_Name1,Group_Name2 [ Without space between group names ]
+       6.  List members of the group  --> getent group Group_Name
+
+[ B ]  Users
+=================
+	1. Create samba users --> useradd User_Name -M -s /usr/sbin/nologin -G smbusers
+           [ Note :-s /usr/sbin/nologin : Restricting shell access, -M for no home directory ]
+	1-a.  Give user samba password -->  smbpasswd -a User_Name  
+	2. Add user to group  --> usrmod User_Name  -a -G Group_Name
+        3. List the groups which users belongs to --> groups User_Name
+        4. Remove a user from the group --> gpasswd -d username group
+	5. List all Samba Users -->  pdbedit -L
+        6. Change Samba User Password -->  smbpasswd User_Name
